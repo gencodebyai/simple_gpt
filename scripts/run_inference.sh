@@ -50,7 +50,7 @@ echo "采样温度: $TEMPERATURE"
 
 # 运行推理脚本
 python3 src/inference.py \
-    --prompt "你好，请问" \
+    --prompt "穆爾基普萊斯" \
     --model_path "$MODEL_PATH" \
     --data_path "$DATA_PATH" \
     --block_size $BLOCK_SIZE \

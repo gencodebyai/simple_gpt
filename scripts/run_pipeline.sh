@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 设置参数
-NUM_PAGES=10
+NUM_PAGES=100
 TEST_SIZE=0.1
 VAL_SIZE=0.1
 EPOCHS=10
