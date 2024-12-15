@@ -60,15 +60,35 @@ class Block(nn.Module):
 class GPT(nn.Module):
     def __init__(self, config):
         super().__init__()
-        self.config = config
         
+        self.block_size = config.block_size
+        
+        # token 编码
         self.tok_emb = nn.Embedding(config.vocab_size, config.n_embd)
+        # 位置编码
         self.pos_emb = nn.Parameter(torch.zeros(1, config.block_size, config.n_embd))
         self.drop = nn.Dropout(config.dropout)
         
-        self.blocks = nn.Sequential(*[Block(config) for _ in range(config.n_layer)])
+        # transformer blocks
+        self.blocks = nn.ModuleList([
+            Block(config) for _ in range(config.n_layer)
+        ])
+        
+        # 最后的层归一化
         self.ln_f = nn.LayerNorm(config.n_embd)
+        # 输出投影
         self.head = nn.Linear(config.n_embd, config.vocab_size, bias=False)
+        
+        self.apply(self._init_weights)
+
+    def _init_weights(self, module):
+        if isinstance(module, (nn.Linear, nn.Embedding)):
+            module.weight.data.normal_(mean=0.0, std=0.02)
+            if isinstance(module, nn.Linear) and module.bias is not None:
+                module.bias.data.zero_()
+        elif isinstance(module, nn.LayerNorm):
+            module.weight.data.fill_(1.0)
+            module.bias.data.zero_()
 
     def forward(self, idx, targets=None):
         B, T = idx.size()
@@ -79,7 +99,8 @@ class GPT(nn.Module):
         x = self.drop(token_embeddings + position_embeddings)
         
         # transformer blocks
-        x = self.blocks(x)
+        for block in self.blocks:
+            x = block(x)
         x = self.ln_f(x)
         logits = self.head(x)
         
@@ -90,19 +111,38 @@ class GPT(nn.Module):
             
         return logits, loss
 
-    def generate(self, idx, max_new_tokens, temperature=1.0):
+    @torch.no_grad()
+    def generate(self, idx, max_new_tokens, temperature=1.0, top_k=None):
+        """
+        生成文本的方法
+        Args:
+            idx: 初始token序列 (B, T)
+            max_new_tokens: 要生成的最大新token数量
+            temperature: 采样温度
+            top_k: 如果设置，只从概率最高的k个token中采样
+        Returns:
+            torch.Tensor: 生成的token序列 (B, T+max_new_tokens)
+        """
         for _ in range(max_new_tokens):
-            # crop idx to the last block_size tokens if needed
-            idx_cond = idx if idx.size(1) <= self.config.block_size else idx[:, -self.config.block_size:]
-            # forward pass
-            logits, _ = self.forward(idx_cond)
-            # focus only on the last time step
-            logits = logits[:, -1, :] / temperature
-            # apply softmax to convert logits to probabilities
+            # 如果序列太长，只保留最后 block_size 个token
+            idx_cond = idx if idx.size(1) <= self.block_size else idx[:, -self.block_size:]
+            
+            # 前向传播得到logits
+            logits, _ = self(idx_cond)
+            logits = logits[:, -1, :] / temperature  # 只关注最后一个位置
+            
+            # 可选的top-k采样
+            if top_k is not None:
+                v, _ = torch.topk(logits, min(top_k, logits.size(-1)))
+                logits[logits < v[:, [-1]]] = float('-inf')
+            
+            # 应用softmax得到概率
             probs = F.softmax(logits, dim=-1)
-            # sample from the distribution
+            
+            # 采样下一个token
             idx_next = torch.multinomial(probs, num_samples=1)
-            # append sampled index to the running sequence
+            
+            # 将新token添加到序列中
             idx = torch.cat((idx, idx_next), dim=1)
         
         return idx 

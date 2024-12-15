@@ -2,9 +2,18 @@ import torch
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 import argparse
-from model import GPT
-from config import GPTConfig
-from dataset import TextDataset
+import os
+import sys
+from pathlib import Path
+
+# 添加项目根目录到 Python 路径
+current_dir = Path(__file__).parent.absolute()
+project_root = current_dir.parent
+sys.path.insert(0, str(project_root))
+
+from src.model.gpt import GPT
+from src.utils.config import ModelConfig
+from src.utils.dataset import TextDataset
 
 def get_device():
     """自动检测并返回可用的设备（GPU/CPU）"""
@@ -53,7 +62,9 @@ def train(config, model, train_dataset):
         
         # 保存模型
         if (epoch + 1) % 5 == 0:  # 每5个epoch保存一次
-            torch.save(model.state_dict(), f'checkpoints/model_epoch_{epoch+1}.pt')
+            save_dir = 'checkpoints'
+            os.makedirs(save_dir, exist_ok=True)
+            torch.save(model.state_dict(), f'{save_dir}/model_epoch_{epoch+1}.pt')
 
     # 保存最终模型
     torch.save(model.state_dict(), 'checkpoints/model_final.pt')
@@ -64,13 +75,14 @@ def parse_args():
     parser.add_argument('--epochs', type=int, default=10, help='训练轮数')
     parser.add_argument('--batch_size', type=int, default=32, help='训练批次大小')
     parser.add_argument('--learning_rate', type=float, default=3e-4, help='学习率')
-    parser.add_argument('--block_size', type=int, default=256, help='序列长度')
+    parser.add_argument('--block_size', type=int, default=128, help='序列长度')
     return parser.parse_args()
 
 def main():
     args = parse_args()
     
-    config = GPTConfig()
+    # 创建配置对象
+    config = ModelConfig()
     config.max_epochs = args.epochs
     config.batch_size = args.batch_size
     config.learning_rate = args.learning_rate
@@ -83,6 +95,9 @@ def main():
     
     # 加载数据集
     train_dataset = TextDataset(args.data_path, block_size=args.block_size)
+    
+    # 更新配置中的词表大小
+    config.vocab_size = train_dataset.get_vocab_size()
     
     # 创建模型
     model = GPT(config).to(device)
