@@ -1,20 +1,0 @@
-/Users/zxw/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
-  warnings.warn(
-Using device: mps
-Epoch 1/10:   0%|          | 0/29 [00:00<?, ?it/s]Epoch 1/10:   0%|          | 0/29 [00:11<?, ?it/s]
-Traceback (most recent call last):
-  File "/Users/zxw/code/gpt_by_ai/src/train.py", line 78, in <module>
-    main() 
-  File "/Users/zxw/code/gpt_by_ai/src/train.py", line 75, in main
-    train(config, model, train_dataset)
-  File "/Users/zxw/code/gpt_by_ai/src/train.py", line 32, in train
-    logits, loss = model(x, y)
-  File "/Users/zxw/Library/Python/3.9/lib/python/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/Users/zxw/Library/Python/3.9/lib/python/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/Users/zxw/code/gpt_by_ai/src/model.py", line 89, in forward
-    loss = F.cross_entropy(logits.view(-1, logits.size(-1)), targets.view(-1))
-  File "/Users/zxw/Library/Python/3.9/lib/python/site-packages/torch/nn/functional.py", line 3059, in cross_entropy
-    return torch._C._nn.cross_entropy_loss(input, target, weight, _Reduction.get_enum(reduction), ignore_index, label_smoothing)
-RuntimeError: MPS backend out of memory (MPS allocated: 4.70 GB, other allocations: 909.46 MB, max allowed: 6.80 GB). Tried to allocate 1.53 GB on private pool. Use PYTORCH_MPS_HIGH_WATERMARK_RATIO=0.0 to disable upper limit for memory allocations (may cause system failure).

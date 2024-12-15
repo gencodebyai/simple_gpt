@@ -1,20 +1,0 @@
-开始数据处理: Sun Dec 15 11:20:40 CST 2024
-开始爬取数据...
-/Users/zxw/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
-  warnings.warn(
-爬取维基百科:   0%|          | 0/10 [00:00<?, ?it/s]爬取维基百科:  10%|█         | 1/10 [00:08<01:15,  8.39s/it]爬取维基百科:  20%|██        | 2/10 [00:12<00:48,  6.08s/it]爬取维基百科:  30%|███       | 3/10 [00:18<00:41,  5.87s/it]爬取维基百科:  40%|████      | 4/10 [00:25<00:37,  6.28s/it]爬取维基百科:  50%|█████     | 5/10 [00:30<00:28,  5.69s/it]爬取维基百科:  60%|██████    | 6/10 [00:33<00:20,  5.03s/it]爬取维基百科:  70%|███████   | 7/10 [00:38<00:15,  5.08s/it]爬取维基百科:  80%|████████  | 8/10 [00:48<00:12,  6.42s/it]爬取维基百科:  90%|█████████ | 9/10 [00:56<00:06,  6.96s/it]2024-12-15 11:22:12,107 - ERROR - 爬取出错: HTTPSConnectionPool(host='zh.wikipedia.org', port=443): Max retries exceeded with url: /wiki/%E9%BB%84%E9%93%8E%E5%A0%A1%E9%95%87 (Caused by ProxyError('Unable to connect to proxy', RemoteDisconnected('Remote end closed connection without response')))
-爬取维基百科: 100%|██████████| 10/10 [01:30<00:00, 15.41s/it]爬取维基百科: 100%|██████████| 10/10 [01:30<00:00,  9.07s/it]
-开始预处理数据...
-清理文本:   0%|          | 0/23 [00:00<?, ?it/s]清理文本: 100%|██████████| 23/23 [00:00<00:00, 66438.70it/s]
-Building prefix dict from the default dictionary ...
-2024-12-15 11:22:14,494 - DEBUG - Building prefix dict from the default dictionary ...
-Loading model from cache /var/folders/y4/6s5dkth50nxgm_h55g_s24dw0000gn/T/jieba.cache
-2024-12-15 11:22:14,494 - DEBUG - Loading model from cache /var/folders/y4/6s5dkth50nxgm_h55g_s24dw0000gn/T/jieba.cache
-Loading model cost 0.621 seconds.
-2024-12-15 11:22:15,114 - DEBUG - Loading model cost 0.621 seconds.
-Prefix dict has been built successfully.
-2024-12-15 11:22:15,114 - DEBUG - Prefix dict has been built successfully.
-2024-12-15 11:22:15,131 - INFO - 保存train.txt，共16条数据
-2024-12-15 11:22:15,132 - INFO - 保存valid.txt，共3条数据
-2024-12-15 11:22:15,132 - INFO - 保存test.txt，共3条数据
-数据处理完成: Sun Dec 15 11:22:15 CST 2024

@@ -1,12 +1,0 @@
-清理文本:   0%|          | 0/30 [00:00<?, ?it/s]清理文本: 100%|██████████| 30/30 [00:00<00:00, 46362.98it/s]
-Building prefix dict from the default dictionary ...
-2024-12-15 11:16:22,537 - DEBUG - Building prefix dict from the default dictionary ...
-Dumping model to file cache /var/folders/y4/6s5dkth50nxgm_h55g_s24dw0000gn/T/jieba.cache
-2024-12-15 11:16:23,187 - DEBUG - Dumping model to file cache /var/folders/y4/6s5dkth50nxgm_h55g_s24dw0000gn/T/jieba.cache
-Loading model cost 0.727 seconds.
-2024-12-15 11:16:23,265 - DEBUG - Loading model cost 0.727 seconds.
-Prefix dict has been built successfully.
-2024-12-15 11:16:23,265 - DEBUG - Prefix dict has been built successfully.
-2024-12-15 11:16:23,292 - INFO - 保存train.txt，共22条数据
-2024-12-15 11:16:23,293 - INFO - 保存valid.txt，共3条数据
-2024-12-15 11:16:23,293 - INFO - 保存test.txt，共3条数据

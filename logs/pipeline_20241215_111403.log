@@ -1,4 +1,0 @@
-开始数据处理流程: Sun Dec 15 11:14:03 CST 2024
-/Users/zxw/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
-  warnings.warn(
-爬取维基百科:   0%|          | 0/1000 [00:00<?, ?it/s]
