@@ -32,29 +32,6 @@ project/
 ```
 
 
-
-
-## 项目目录结构
-
-```
-src/ - 源代码目录
-model/ - 模型相关代码
-  gpt.py - GPT模型实现
-  attention.py - 注意力机制实现
-utils/ - 工具函数
-  data.py - 数据处理
-  train.py - 训练相关函数
-  config.py - 配置文件
-data/ - 数据目录
-  raw/ - 原始数据
-  processed/ - 处理后的数据
-notebooks/ - Jupyter notebooks
-tests/ - 测试代码
-requirements.txt - 依赖库
-LICENSE - 许可证
-.gitignore - 忽略文件
-```
-
 ## 功能说明
 
 - 数据爬取与预处理：支持从网络爬取中文文本数据，并进行清洗和分词等预处理。
