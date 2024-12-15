@@ -1,0 +1,2 @@
+usage: train.py [-h] --data_path DATA_PATH [--epochs EPOCHS]
+train.py: error: unrecognized arguments: --batch_size 32 --learning_rate 3e-4

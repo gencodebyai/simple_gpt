@@ -1,0 +1,7 @@
+Using device: mps
+Traceback (most recent call last):
+  File "/Users/zxw/code/gpt_by_ai/src/train.py", line 76, in <module>
+    main() 
+  File "/Users/zxw/code/gpt_by_ai/src/train.py", line 67, in main
+    train_dataset = TextDataset(args.data_path)
+TypeError: __init__() missing 1 required positional argument: 'block_size'

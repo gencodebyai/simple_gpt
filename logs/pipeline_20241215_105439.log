@@ -1,0 +1,4 @@
+开始数据处理流程: Sun Dec 15 10:54:39 CST 2024
+./scripts/run_pipeline.sh: line 19: python: command not found
+./scripts/run_pipeline.sh: line 25: python: command not found
+完整流程结束: Sun Dec 15 10:54:39 CST 2024
