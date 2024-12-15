@@ -73,11 +73,9 @@ pip3 install -r requirements.txt
 
 ## 联系方式
 
-如有问题请提issue或发送邮件。
+如有问题请提issue或发送邮件zhangxw0413@gmail.com。
 
 ## 版本记录
 
 - v0.1 - 初始版本：基础功能实现
-```
 
-这个Markdown格式的文档提供了清晰的项目结构和使用说明，方便用户理解和操作。
